@@ -1,0 +1,32 @@
+#!/bin/bash
+# ===========================================================
+# config.sh.example — copy this file to config.sh and fill
+# in your own values. config.sh is git-ignored so your
+# credentials never get committed.
+# ===========================================================
+#
+# ⚠️  NOTE FOR PRODUCTION / CI USE:
+#   Storing credentials in a plaintext file is fine for local
+#   dev, but NOT for production. In a real pipeline you should:
+#
+#   1. Store the app-specific password in the macOS Keychain:
+#        xcrun notarytool store-credentials "notarization" \
+#          --apple-id "your@email.com" \
+#          --team-id "YOURTEAMID"
+#      Then replace --password / --apple-id / --team-id in
+#      notarize.sh with just: --keychain-profile "notarization"
+#
+#   2. For CI (GitHub Actions, Azure DevOps, etc.) use
+#      repository secrets / environment variables instead of
+#      this file, and never check credentials into source control.
+# ===========================================================
+
+# Certificate names — copy exactly from:
+#   security find-identity -v -p codesigning
+APP_CERT="Developer ID Application: Your Name (TEAMID)"
+INSTALLER_CERT="Developer ID Installer: Your Name (TEAMID)"
+
+# Apple notarization credentials
+APPLE_ID="your@email.com"
+APP_PASSWORD="xxxx-xxxx-xxxx-xxxx"   # app-specific password from appleid.apple.com
+TEAM_ID="YOURTEAMID"
