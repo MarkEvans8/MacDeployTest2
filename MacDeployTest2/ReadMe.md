@@ -22,3 +22,4 @@ See the mac-scripts folder for everything you need:
 - A Mac (Apple Silicon recommended — can be rented at [scaleway.com](https://www.scaleway.com))
 - .NET 10 SDK
 - Xcode Command Line Tools
+ 
