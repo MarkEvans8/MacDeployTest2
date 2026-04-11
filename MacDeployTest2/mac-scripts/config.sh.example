@@ -1,8 +1,16 @@
 #!/bin/bash
-# ===========================================================
-# config.sh.example — copy this file to config.sh and fill
-# in your own values. config.sh is git-ignored so your
-# credentials never get committed.
+# =====================================================
+# config.sh — all settings for this project
+# This file is git-ignored and stays on this machine only.
+# =====================================================
+# 1. Copy this file to config.sh
+# 2. Fill in your values below
+# 3. config.sh is git-ignored — your credentials are never committed
+#
+# See INSTRUCTIONS.md for help finding these values.
+# =====================================================
+
+
 # ===========================================================
 #
 # ⚠️  NOTE FOR PRODUCTION / CI USE:
@@ -18,15 +26,28 @@
 #
 #   2. For CI (GitHub Actions, Azure DevOps, etc.) use
 #      repository secrets / environment variables instead of
-#      this file, and never check credentials into source control.
-# ===========================================================
+#      this file, and never check credentials into source control
 
-# Certificate names — copy exactly from:
-#   security find-identity -v -p codesigning
+
+
+# ---------------------------------------------------
+# Project settings — update these to match your .csproj
+# ---------------------------------------------------
+APP_NAME="MacDeployTest2"                    # must match <ApplicationTitle> in .csproj
+BUNDLE_ID="com.companyname.macdeploytest2"   # must match <ApplicationId> in .csproj
+VERSION="1.0"                                # your app version number
+
+# ---------------------------------------------------
+# Signing certificates
+# Run setup-mac.sh to list what is installed, then copy the full name
+# exactly as shown, including the brackets and team ID.
+# ---------------------------------------------------
 APP_CERT="Developer ID Application: Your Name (TEAMID)"
 INSTALLER_CERT="Developer ID Installer: Your Name (TEAMID)"
 
+# ---------------------------------------------------
 # Apple notarization credentials
+# ---------------------------------------------------
 APPLE_ID="your@email.com"
 APP_PASSWORD="xxxx-xxxx-xxxx-xxxx"   # app-specific password from appleid.apple.com
-TEAM_ID="YOURTEAMID"
+TEAM_ID="YOURTEAMID"                 # 10-character code from developer.apple.com/account
