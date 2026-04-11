@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MacDeployTest2/mac-scripts/ZZconfig.sh
+/MacDeployTest2/mac-scripts/temp.txt
+/MacDeployTest2/mac-scripts/MarkTemp.txt
