@@ -13,8 +13,8 @@ A working example of how to build, sign, notarize, and distribute a .NET MAUI Ma
 
 See the mac-scripts folder for everything you need:
 
-- **[INSTRUCTIONS.md](MacDeployTest2/mac-scripts/INSTRUCTIONS.md)** — full step-by-step setup guide
-- **[README.md](MacDeployTest2/mac-scripts/README.md)** — quick start
+- **[INSTRUCTIONS.md](Mmac-scripts/INSTRUCTIONS.md)** — full step-by-step setup guide
+- **[README.md](mac-scripts/README.md)** — quick start
 
 ## Requirements
 
