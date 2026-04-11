@@ -1,1 +1,1 @@
-**[README.md](MacDeployTest2/mac-scripts/README.md)**
+**[README.md](MacDeployTest2/README.md)**
