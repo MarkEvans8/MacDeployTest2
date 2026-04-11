@@ -427,3 +427,52 @@ chmod +x *.sh
 
 
 
+
+
+
+
+
+# 1. Verify notarization & Gatekeeper acceptance
+spctl --assess --verbose --type install MacDeployTest2.pkg
+
+# 2. Verify the package signature
+pkgutil --check-signature MacDeployTest2.pkg
+
+# 3. Inspect what the pkg will install (no install needed)
+pkgutil --payload-files MacDeployTest2.pkg
+
+
+
+
+
+
+
+
+# Create a standard (non-admin) user — simulates a real end-user
+sudo sysadminctl -addUser testuser -fullName 'Test User' -password Test1234x -createHomeDirectory
+
+
+# Copy the pkg to a shared location
+sudo cp MacDeployTest2.pkg /Users/Shared/MacDeployTest2.pkg
+sudo chmod 644 /Users/Shared/MacDeployTest2.pkg
+
+# Install it (simulates the user double-clicking it)
+sudo installer -pkg /Users/Shared/MacDeployTest2.pkg -target /
+
+# Then verify it landed correctly
+ls -la /Applications/MacDeployTest2.app
+
+
+# Switch to the test user
+sudo -u testuser -i bash
+
+# Run the Gatekeeper check
+spctl --assess --verbose --type install /Users/Shared/MacDeployTest2.pkg
+
+# Try launching the app
+open /Applications/MacDeployTest2.app
+
+
+
+
+
