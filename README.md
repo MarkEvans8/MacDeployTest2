@@ -1,1 +1,1 @@
-Go to Mac-scripts/readme.md
+Please go to Mac-scripts/readme.md
