@@ -69,6 +69,9 @@ pkgbuild \
 
 rm -rf "$PKG_ROOT"
 
+# Remove the built .app so the installer cannot relocate to the build folder
+rm -rf "$APP_PATH"
+
 echo ""
 echo "======================================"
 echo "Done!"

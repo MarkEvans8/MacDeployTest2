@@ -16,10 +16,5 @@ See the mac-scripts folder for everything you need:
 - **[INSTRUCTIONS.md](mac-scripts/INSTRUCTIONS.md)** — full step-by-step setup guide
 - **[README.md](mac-scripts/README.md)** — quick start
 
-## Requirements
 
-- Apple Developer Program membership ($99/year)
-- A Mac (Apple Silicon recommended — can be rented at [scaleway.com](https://www.scaleway.com))
-- .NET 10 SDK
-- Xcode Command Line Tools
  

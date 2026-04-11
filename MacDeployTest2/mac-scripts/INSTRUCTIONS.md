@@ -120,7 +120,7 @@ You should see both certificates listed. Example output:
 2) F5G6H7I8... "Developer ID Installer: Your Name (ABC123DEF4)"
 ```
 
-You will need to copy these names exactly in Step 5.
+You will need to copy these names exactly in Step 6.
 
 ---
 
@@ -138,7 +138,39 @@ Keep this somewhere safe. You will need it in the next step.
 
 ---
 
-## Step 5 — Configure config.sh
+## Step 5 — Transfer the project to your Mac
+
+Before building on the Mac you need to copy the project across from Windows. Clean it first to strip the build output — this keeps the transfer small and fast.
+
+### On Windows, in Visual Studio:
+
+1. Go to **Build → Clean Solution**
+2. Open **File Explorer** and navigate to your project folder
+3. Delete the `bin` and `obj` folders — they can be several GB and will be rebuilt on the Mac
+4. Right-click the **project folder** → **Send to → Compressed (zipped) folder**
+
+### Transfer using WinSCP:
+
+5. Open **WinSCP** on your Windows machine (see the practical tips above if you have not installed it yet)
+6. Connect to your Mac via SSH
+7. Drag the `.zip` file to a convenient location on the Mac (e.g. your home folder `~/`)
+
+### On the Mac, unzip:
+
+8. Open **Terminal** and run:
+   ```bash
+   cd ~
+   unzip YourProjectName.zip
+   ```
+   Or double-click the `.zip` file in Finder.
+
+Make a note of the path where you extracted the project — you will need it when navigating to the `mac-scripts` folder in the steps below.
+
+> **Alternative:** If your project is in a GitHub repository, you can instead run `git clone <your-repo-url>` on the Mac and skip the zip/transfer entirely.
+
+---
+
+## Step 6 — Configure config.sh
 
 This is the **only file you need to edit**. It contains both your project settings and your signing credentials.
 
@@ -147,7 +179,7 @@ This is the **only file you need to edit**. It contains both your project settin
    cp config.sh.example config.sh
    ```
 
-2. Open `config.sh` in a text editor and fill in all the values:
+2. Open and edit `config.sh` directly on the Mac (e.g. `nano config.sh`). Fill in all the values:
 
    ```bash
    # Project settings
@@ -173,11 +205,16 @@ This is the **only file you need to edit**. It contains both your project settin
    - `APP_PASSWORD` — the app-specific password from Step 4
    - `TEAM_ID` — your 10-character team ID, found at https://developer.apple.com/account under **Membership Details**
 
+> **⚠ Important:** Always create and edit `config.sh` on the Mac, not on Windows. If you create it on Windows and transfer it, it will have Windows line endings (CRLF) which will cause a `command not found` error when the script runs. If this happens, fix it by running:
+> ```bash
+> sed -i '' 's/\r//' *.sh
+> ```
+
 `config.sh` is git-ignored — your credentials will never be committed to the repository.
 
 ---
 
-## Step 6 — Make the scripts executable
+## Step 7 — Make the scripts executable
 
 Run this once in Terminal from the `mac-scripts` folder:
 
@@ -187,7 +224,7 @@ chmod +x *.sh
 
 ---
 
-## Step 7 — Build and package
+## Step 8 — Build and package
 
 From the `mac-scripts` folder, run:
 
@@ -205,7 +242,7 @@ The script exits immediately with an error message if any step fails.
 
 ---
 
-## Step 8 — Notarize
+## Step 9 — Notarize
 
 From the `mac-scripts` folder, run:
 
@@ -219,7 +256,7 @@ After notarization, macOS will allow any user to install the app without any sec
 
 ---
 
-## Step 9 — Distribute
+## Step 10 — Distribute
 
 Your `.pkg` file is in the project root folder (same level as the `.csproj` file). It is ready to distribute.
 

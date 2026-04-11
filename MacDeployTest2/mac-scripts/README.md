@@ -9,6 +9,10 @@ Scripts to build, sign, notarize, and distribute this app as a `.pkg` installer.
 ## Quick start
 
 ```bash
+
+# Run once to ensure there are no Windows line endings (CRLF)
+sed -i '' 's/\r//' *.sh
+
 # Run once to make scripts executable
 chmod +x *.sh
 
