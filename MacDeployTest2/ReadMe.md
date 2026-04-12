@@ -9,12 +9,25 @@ A working example of how to build, sign, notarize, and distribute a .NET MAUI Ma
 - Notarizing the `.pkg` with Apple so macOS Gatekeeper accepts it on any Mac
 - Packaging everything as a standard `.pkg` installer
 
+## Folder structure
+
+The `mac-scripts` folder must be placed **inside your project folder** — next to the `.csproj` file. Do **not** place it at the solution level alongside the `.sln` file.
+
+```
+YourSolution/
+  YourProject/              <- .csproj lives here
+    mac-scripts/            <- scripts go here
+    YourProject.csproj
+    Platforms/
+    ...
+  YourSolution.sln          <- solution file is one level up — that is correct
+```
+
+If the scripts are in the wrong place you will get `MSB1003: Specify a project or solution file`. The scripts detect this and print a clear error.
+
 ## How to use the scripts
 
-See the mac-scripts folder for everything you need:
+See the `mac-scripts` folder for everything you need:
 
+- **[QUICKSTART.md](mac-scripts/QUICKSTART.md)** — quick start
 - **[INSTRUCTIONS.md](mac-scripts/INSTRUCTIONS.md)** — full step-by-step setup guide
-- **[README.md](mac-scripts/README.md)** — quick start
-
-
- 

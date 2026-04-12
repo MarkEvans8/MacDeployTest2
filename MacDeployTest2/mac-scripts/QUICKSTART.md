@@ -1,4 +1,4 @@
-# Mac Scripts for MacDeployTest2
+# Mac Scripts - Quick Start
 
 Scripts to build, sign, notarize, and distribute this app as a `.pkg` installer.
 
@@ -6,11 +6,31 @@ Scripts to build, sign, notarize, and distribute this app as a `.pkg` installer.
 
 ---
 
+## Folder structure
+
+The `mac-scripts` folder must be placed **inside your project folder** — the folder that contains your `.csproj` file. Do **not** place it at the solution level alongside your `.sln` file.
+
+```
+YourSolution/
+  YourProject/              <- .csproj lives here
+    mac-scripts/            <- scripts go here
+    YourProject.csproj
+    Platforms/
+    ...
+  YourSolution.sln          <- solution file is one level up — that is correct
+```
+
+If the scripts are at the wrong level you will get:
+`MSB1003: Specify a project or solution file`
+
+The scripts will detect this and show a clear error message if the structure is wrong.
+
+---
+
 ## Quick start
 
 ```bash
-
-# Run once to ensure there are no Windows line endings (CRLF)
+# Run once to strip Windows line endings if the files were edited on Windows
 sed -i '' 's/\r//' *.sh
 
 # Run once to make scripts executable

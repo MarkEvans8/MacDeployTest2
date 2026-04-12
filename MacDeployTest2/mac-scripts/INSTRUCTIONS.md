@@ -17,7 +17,27 @@ This guide covers everything you need to build, sign, notarize, and distribute a
 
 ---
 
-## Before you start — practical tips
+## Folder structure — where the scripts must live
+
+The `mac-scripts` folder must be placed **inside your project folder** — the folder that contains your `.csproj` file. Do **not** place it at the solution level alongside your `.sln` file.
+
+```
+YourSolution/
+  YourProject/              <- .csproj lives here
+    mac-scripts/            <- scripts go here
+    YourProject.csproj
+    Platforms/
+    ...
+  YourSolution.sln          <- solution file is one level up — that is correct
+```
+
+The scripts calculate the project path as one level up from `mac-scripts/`. If the scripts are at the solution level, they look in the wrong folder and `dotnet` cannot find a project to build.
+
+> **If you get `MSB1003: Specify a project or solution file`** — this is the cause. Move the `mac-scripts` folder inside your project folder (next to the `.csproj`), not next to the `.sln`.
+
+---
+
+## Before you start
 
 ### Transferring files between Windows and Mac
 
@@ -351,6 +371,20 @@ sudo sysadminctl -deleteUser testuser
 
 ### `config.sh: No such file or directory`
 You have not created `config.sh` yet. Run: `cp config.sh.example config.sh` and fill it in.
+
+### `MSB1003: Specify a project or solution file`
+The `mac-scripts` folder is in the wrong location. It must be placed **inside your project folder** (the folder containing your `.csproj`), not at the solution level alongside your `.sln` file.
+
+Correct structure:
+```
+YourSolution/
+  YourProject/          <- .csproj lives here
+    mac-scripts/        <- scripts must be here
+    YourProject.csproj
+  YourSolution.sln      <- solution file is one level up — that is correct
+```
+
+The scripts detect this automatically and will print the paths to help you diagnose the issue.
 
 ### `Could not find YourApp.app after build`
 The `APP_NAME` in `config.sh` does not match the `<ApplicationTitle>` value in your `.csproj`.
