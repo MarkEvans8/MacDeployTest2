@@ -355,6 +355,20 @@ You have not created `config.sh` yet. Run: `cp config.sh.example config.sh` and 
 ### `Could not find YourApp.app after build`
 The `APP_NAME` in `config.sh` does not match the `<ApplicationTitle>` value in your `.csproj`.
 
+### App installs silently but does not appear in `/Applications`
+macOS has a "relocation" feature: when installing a `.pkg`, it searches the **entire filesystem** for an existing copy of the app with the same bundle ID. If it finds one anywhere — including inside a `bin` or `obj` build output folder, or a second copy of the project on your Desktop — it installs the app **there** instead of `/Applications`. The installer reports success and you see nothing wrong, but your app ends up buried in a build folder.
+
+**Common causes:**
+- You have two copies of the project on the Mac (e.g. both `~/MacDeployTest2` and `~/MacDeployTest2-original` on the Desktop)
+- A previous build left a `.app` inside `bin/Release/...`
+
+**The fix:** The `build-and-package.sh` script now automatically deletes the `.app` from the build output after packaging to prevent this. If you still see the problem, check for duplicate project folders and delete any you are not using:
+```bash
+# Find all copies of your app on the Mac
+find ~ -name "YourAppName.app" -type d 2>/dev/null
+```
+Delete any copies that are not in `/Applications`, then re-run the installer.
+
 ### `no identity found` or certificate errors
 Your certificates are not installed, or the names in `config.sh` do not match exactly. Run `setup-mac.sh` to list what is installed and compare carefully with `APP_CERT` and `INSTALLER_CERT` in `config.sh`.
 
