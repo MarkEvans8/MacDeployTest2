@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MacCatalyst ARM64 Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet: build",
+            "program": "${workspaceFolder}/MacDeployTest2/bin/Debug/net10.0-maccatalyst/maccatalyst-arm64/MacDeployTest2.app/Contents/MacOS/MacDeployTest2",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+                "uriFormat": "{1}",
+                "action": "openExternally"
+            },
+            "console": "integratedTerminal",
+            "logging": {
+                "engineLogging": true
+            }
+        }
+    ]
+}
